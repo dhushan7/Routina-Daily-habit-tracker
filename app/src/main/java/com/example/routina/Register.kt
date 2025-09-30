@@ -41,14 +41,7 @@ class Register : AppCompatActivity() {
             val email = uEmail.text.toString()
             val pass = uPass.text.toString()
             val confirmPass = uConfirmPass.text.toString()
-//            if(uName.text.toString()!=""){
-//                val name = uName.text.toString()
-//
-//                val intent = Intent(this, Login::class.java)
-//                intent.putExtra("User_Name", name)
-//
-//                startActivity(intent)
-//            }
+
             when {
                 name.isEmpty() || age.isEmpty() || email.isEmpty() || pass.isEmpty() || confirmPass.isEmpty() -> {
                     Toast.makeText(this,"Enter all the details", Toast.LENGTH_LONG).show()
@@ -67,12 +60,12 @@ class Register : AppCompatActivity() {
                     editor.putString("name", name)
                     editor.putString("age", age)
                     editor.putString("email", email)
-                    editor.putString("password", pass) // ❗ not secure, just for testing/demo
-                    editor.apply() // save changes
+                    editor.putString("password", pass)
+                    editor.apply() // save the changes
 
                     Toast.makeText(this, "Registration successful!", Toast.LENGTH_LONG).show()
 
-                    // Go to Login screen
+
                     val intent = Intent(this, Login::class.java)
                     startActivity(intent)
 
