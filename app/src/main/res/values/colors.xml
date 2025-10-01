@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="navy">#0F3760</color>
+    <color name="gray">#D9D9D9</color>
+    <color name="teal">#00796B</color>
+
+<!--    image color #0F3760(Navy) refreshing with structure and #FE8A5C(Coral) active -->
 </resources>
