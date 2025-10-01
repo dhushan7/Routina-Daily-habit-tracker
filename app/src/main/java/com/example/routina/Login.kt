@@ -10,11 +10,27 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.routina.databinding.ActivityLoginBinding
 
 class Login : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        // checking  user is already logged in
+        val sharedPref = getSharedPreferences("UserData", MODE_PRIVATE)
+        if (sharedPref.getBoolean("isLoggedIn", false)) {
+            startActivity(Intent(this, HomePage::class.java))
+            finish() // close Login activity
+        }
+
+        // 2️⃣ Setup ViewBinding
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

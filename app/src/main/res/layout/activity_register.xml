@@ -14,14 +14,14 @@
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:hint="Name"
+        android:hint="@string/name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.228"
-        tools:ignore="HardcodedText,LabelFor,TouchTargetSizeCheck" />
+        />
 
     <EditText
         android:id="@+id/emailReg"
@@ -30,12 +30,12 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:hint="e-mail"
+        android:hint="@string/e_mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Age"
-        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+        />
 
     <EditText
         android:id="@+id/passReg"
@@ -44,12 +44,12 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:hint="Password"
+        android:hint="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailReg"
-        tools:ignore="Autofill,HardcodedText,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        />
 
     <EditText
         android:id="@+id/confirmPassReg"
@@ -58,12 +58,12 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:hint="Confirm Password"
+        android:hint="@string/confirm_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passReg"
-        tools:ignore="Autofill,HardcodedText,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        />
 
     <EditText
         android:id="@+id/Age"
@@ -72,32 +72,32 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Age"
+        android:hint="@string/age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name"
-        tools:ignore="Autofill,HardcodedText,LabelFor,TouchTargetSizeCheck" />
+        />
 
     <Button
         android:id="@+id/buttonReg"
         android:layout_width="207dp"
         android:layout_height="40dp"
         android:layout_marginTop="28dp"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPassReg"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+        />
 
     <TextView
         android:id="@+id/LoginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,6 +107,6 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonReg"
         app:layout_constraintVertical_bias="0.03"
         tools:text="Login"
-        tools:ignore="HardcodedText" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
