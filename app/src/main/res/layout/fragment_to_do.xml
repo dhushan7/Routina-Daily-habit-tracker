@@ -18,6 +18,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <!-- New container for date + emoji -->
+        <LinearLayout
+            android:id="@+id/dateFeelingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/container_todo"
+            android:padding="12dp">
+
+            <!-- Date -->
+            <TextView
+                android:id="@+id/tvSelectedDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2025-10-02"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:ellipsize="end"
+                android:singleLine="true"/>
+
+            <!-- Emoji -->
+            <TextView
+                android:id="@+id/tvDayFeeling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="😐"
+                android:textSize="24sp"
+                android:padding="8dp"/>
+        </LinearLayout>
 
         <!-- Rectangle container for tasks -->
         <LinearLayout
