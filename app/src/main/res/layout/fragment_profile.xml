@@ -1,27 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    android:fillViewport="true"
+    android:padding="20dp">
 
-    <TextView
-        android:id="@+id/profileText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:textSize="26sp"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="100dp"
-        tools:ignore="HardcodedText" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal|center_vertical">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        tools:ignore="HardcodedText" />
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Profile"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            />
 
-</FrameLayout>
+        <!-- Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="30dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:  "
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/viewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User Name"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <!-- Email -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="30dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email:  "
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/viewEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user@email.com"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <!-- Nickname -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nickname:  "
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/viewNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not set"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+        <!-- Bio -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bio:  "
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/viewBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not set"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+        <!-- Age -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age: "
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/viewAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not set"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+        <!-- Phone -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone:  "
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/viewPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not set"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+        <!-- Blood Group -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Group:  "
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/viewBloodGrp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not set"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
+
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/btnEditProfile"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Logout"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,17 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HealthFragment">
+    tools:context=".HealthFragment"
+    android:fillViewport="true"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Health Fragment"
-        android:textSize="26dp"
-        android:layout_gravity="center"
-        tools:ignore="HardcodedText,SpUsage" />
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:spacing="16dp">
 
-</FrameLayout>
+        <!-- Hydration Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/container_todo"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvHydration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hydration: 0 / 2000 ml"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:padding="16dp">
+
+            <Button
+                android:id="@+id/btnAddWater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add 250ml Water"
+                android:layout_gravity="center"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/btnSetHydrationLimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/set_hydration_limit"
+                    android:textColor="@color/navy"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Calories Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/container_todo"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calories: 0 / 2500 kcal"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:padding="16dp">
+            <Button
+                android:id="@+id/btnAddCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
+                android:text="Add 100 kcal" />
+
+                <TextView
+                    android:id="@+id/btnSetCalorieLimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="6dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/set_calorie_limit"
+                    android:textColor="@color/navy"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
