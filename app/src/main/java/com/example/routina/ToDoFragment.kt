@@ -28,7 +28,8 @@ class ToDoFragment : Fragment() {
     private lateinit var calendarView: CalendarView
     private lateinit var todoContainer: LinearLayout
     private lateinit var btnAddTask: Button
-    private lateinit var tvDayFeeling: TextView  // Day-level emoji
+    private lateinit var tvDayFeeling: TextView
+    private lateinit var tvSelectedDate: TextView
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val todayDate = dateFormat.format(Date())
@@ -48,22 +49,16 @@ class ToDoFragment : Fragment() {
         calendarView = view.findViewById(R.id.calendarView2)
         todoContainer = view.findViewById(R.id.todoContainer)
         btnAddTask = view.findViewById(R.id.btnAddTask)
-
-        // Inflate a top TextView for day-level feeling emoji
-        tvDayFeeling = TextView(requireContext()).apply {
-            textSize = 24f
-            setPadding(16, 16, 16, 16)
-            text = "😐"
-        }
-        todoContainer.addView(tvDayFeeling, 0) // add at top
+        tvDayFeeling = view.findViewById(R.id.tvDayFeeling)
+        tvSelectedDate = view.findViewById(R.id.tvSelectedDate)
 
         calendarView.maxDate = System.currentTimeMillis()
         loadTasks()
 
-        // Load today tasks
+        // Load today’s tasks by default
         loadTasksForDate(todayDate)
 
-        // Calendar selection
+        // Handle date selection
         calendarView.setOnDateChangeListener { _, year, month, day ->
             val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, day)
             loadTasksForDate(selectedDate)
@@ -75,11 +70,16 @@ class ToDoFragment : Fragment() {
     }
 
     private fun loadTasksForDate(date: String) {
-        todoContainer.removeViews(1, todoContainer.childCount - 1) // keep top emoji
+        // Clear task container
+        todoContainer.removeAllViews()
+
         val isToday = date == todayDate
         btnAddTask.visibility = if (isToday) View.VISIBLE else View.GONE
 
         val dailyData = todoMap.getOrPut(date) { DailyData() }
+
+        // update date + emoji
+        tvSelectedDate.text = date
         tvDayFeeling.text = dailyData.feeling
 
         if (isToday) {
@@ -88,6 +88,7 @@ class ToDoFragment : Fragment() {
             tvDayFeeling.setOnClickListener(null) // read-only
         }
 
+        // Load all tasks for this day
         for (task in dailyData.tasks) {
             val taskView = layoutInflater.inflate(R.layout.item_todo, todoContainer, false)
             val tvTask = taskView.findViewById<TextView>(R.id.tvTask)
