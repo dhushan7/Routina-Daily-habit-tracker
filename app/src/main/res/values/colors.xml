@@ -5,6 +5,11 @@
     <color name="navy">#0F3760</color>
     <color name="gray">#D9D9D9</color>
     <color name="teal">#00796B</color>
+    <color name="card_white">#FFDEE9</color>
+    <color name="green">#45FFB4</color>
+    <color name="blue">#62FBFF</color>
+    <color name="coral">#EDBD7A</color>
+    <color name="indigo">#C478FA</color>
 
 <!--    image color #0F3760(Navy) refreshing with structure and #FE8A5C(Coral) active -->
 </resources>
