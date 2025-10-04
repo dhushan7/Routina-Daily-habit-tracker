@@ -5,7 +5,7 @@
             <corners android:radius="20dp" />
             <gradient
                 android:startColor="@color/white"
-                android:endColor="@color/indigo"
+                android:endColor="#A4DCAB"
                 android:angle="0" />
 
             <padding
@@ -16,7 +16,7 @@
 
             <stroke
                 android:width="2dp"
-                android:color="#8800ED" />
+                android:color="#01FF16" />
 
 
         </shape>

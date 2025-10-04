@@ -15,7 +15,10 @@ import java.util.*
 
 data class Task(
     var name: String,
-    var status: String = "Pending"
+    var status: String = "Pending",
+    var category: String = "General",
+    var priority: String = "Medium",
+    var time: String = ""
 )
 
 data class DailyData(
@@ -30,6 +33,7 @@ class ToDoFragment : Fragment() {
     private lateinit var btnAddTask: Button
     private lateinit var tvDayFeeling: TextView
     private lateinit var tvSelectedDate: TextView
+    private lateinit var tvCompletionPercentage: TextView
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val todayDate = dateFormat.format(Date())
@@ -51,6 +55,7 @@ class ToDoFragment : Fragment() {
         btnAddTask = view.findViewById(R.id.btnAddTask)
         tvDayFeeling = view.findViewById(R.id.tvDayFeeling)
         tvSelectedDate = view.findViewById(R.id.tvSelectedDate)
+        tvCompletionPercentage = view.findViewById(R.id.tvCompletionPercentage)
 
         calendarView.maxDate = System.currentTimeMillis()
         loadTasks()
@@ -78,9 +83,18 @@ class ToDoFragment : Fragment() {
 
         val dailyData = todoMap.getOrPut(date) { DailyData() }
 
-        // update date + emoji
+        // update date + emoji + completion percentage
         tvSelectedDate.text = date
         tvDayFeeling.text = dailyData.feeling
+        
+        // Calculate and display completion percentage
+        val completionPercentage = if (dailyData.tasks.isEmpty()) {
+            0
+        } else {
+            val completedTasks = dailyData.tasks.count { it.status == "Completed" }
+            (completedTasks * 100) / dailyData.tasks.size
+        }
+        tvCompletionPercentage.text = "${completionPercentage}%"
 
         if (isToday) {
             tvDayFeeling.setOnClickListener { showFeelingDialog(date) }
@@ -93,11 +107,24 @@ class ToDoFragment : Fragment() {
             val taskView = layoutInflater.inflate(R.layout.item_todo, todoContainer, false)
             val tvTask = taskView.findViewById<TextView>(R.id.tvTask)
             val tvStatus = taskView.findViewById<TextView>(R.id.tvStatus)
+            val tvCategory = taskView.findViewById<TextView>(R.id.tvCategory)
+            val tvPriority = taskView.findViewById<TextView>(R.id.tvPriority)
+            val tvTime = taskView.findViewById<TextView>(R.id.tvTime)
             val btnEdit = taskView.findViewById<ImageView>(R.id.btnEdit)
             val btnDelete = taskView.findViewById<ImageView>(R.id.btnDelete)
 
             tvTask.text = task.name
             tvStatus.text = task.status
+            tvCategory.text = task.category
+            tvPriority.text = task.priority
+            tvTime.text = if (task.time.isNotEmpty()) task.time else "No time set"
+
+            // Set status color based on status
+            when (task.status) {
+                "Completed" -> tvStatus.setBackgroundColor(android.graphics.Color.parseColor("#4CAF50"))
+                "In-Progress" -> tvStatus.setBackgroundColor(android.graphics.Color.parseColor("#FF9800"))
+                else -> tvStatus.setBackgroundColor(android.graphics.Color.parseColor("#9E9E9E"))
+            }
 
             if (isToday) {
                 btnEdit.visibility = View.VISIBLE
@@ -121,15 +148,38 @@ class ToDoFragment : Fragment() {
     }
 
     private fun showAddTaskDialog(date: String) {
-        val input = EditText(requireContext())
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_todo, null)
+        val inputName = dialogView.findViewById<EditText>(R.id.etHabitName)
+        val spinnerCategory = dialogView.findViewById<Spinner>(R.id.spinnerCategory)
+        val spinnerPriority = dialogView.findViewById<Spinner>(R.id.spinnerPriority)
+        val inputTime = dialogView.findViewById<EditText>(R.id.etHabitTime)
+        
+        // Setup category spinner
+        val categories = arrayOf("Health", "Work", "Personal", "Learning", "Exercise", "General")
+        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategory.adapter = categoryAdapter
+        
+        // Setup priority spinner
+        val priorities = arrayOf("Low", "Medium", "High")
+        val priorityAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorities)
+        priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerPriority.adapter = priorityAdapter
+        
         AlertDialog.Builder(requireContext())
-            .setTitle("Add Task")
-            .setView(input)
+            .setTitle("Add New Task")
+            .setView(dialogView)
             .setPositiveButton("Add") { _, _ ->
-                val taskName = input.text.toString().trim()
-                if (taskName.isNotEmpty()) {
+                val habitName = inputName.text.toString().trim()
+                if (habitName.isNotEmpty()) {
                     val dailyData = todoMap.getOrPut(date) { DailyData() }
-                    dailyData.tasks.add(Task(taskName))
+                    val task = Task(
+                        name = habitName,
+                        category = categories[spinnerCategory.selectedItemPosition],
+                        priority = priorities[spinnerPriority.selectedItemPosition],
+                        time = inputTime.text.toString().trim()
+                    )
+                    dailyData.tasks.add(task)
                     saveTasks()
                     loadTasksForDate(date)
                 }
