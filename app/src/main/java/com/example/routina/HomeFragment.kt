@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import java.text.SimpleDateFormat
@@ -23,6 +24,9 @@ class HomeFragment : Fragment() {
     private lateinit var containerHydration: View
     private lateinit var containerCalories: View
     private lateinit var containerTodo: View
+    private lateinit var containerMoodTrend: View
+    
+    private var sensorManager: SensorManager? = null
 
     private val healthPrefs = "health_prefs"
     private val todoPrefs = "todo_prefs"
@@ -50,6 +54,7 @@ class HomeFragment : Fragment() {
         containerHydration = view.findViewById(R.id.hydrationCardContainer)
         containerCalories = view.findViewById(R.id.calorieCardContainer)
         containerTodo = view.findViewById(R.id.todoCardContainer)
+        containerMoodTrend = view.findViewById(R.id.moodTrendCardContainer)
 
         // load greeting
         val sharedPref = requireActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE)
@@ -62,11 +67,15 @@ class HomeFragment : Fragment() {
         // load mood
         loadMood()
 
+        // Initialize sensor manager
+        initializeSensorManager()
+        
         // tap listeners
         containerMood.setOnClickListener { showMoodDialog() }
         containerHydration.setOnClickListener { openFragment(HealthFragment()) }
         containerCalories.setOnClickListener { openFragment(HealthFragment()) }
         containerTodo.setOnClickListener { openFragment(ToDoFragment()) }
+        containerMoodTrend.setOnClickListener { openFragment(MoodTrendFragment()) }
     }
 
     private fun loadHealthData() {
@@ -120,10 +129,54 @@ class HomeFragment : Fragment() {
             .show()
     }
 
+    private fun initializeSensorManager() {
+        sensorManager = SensorManager(requireContext())
+        
+        sensorManager?.onShakeDetected = {
+            // Quick mood update on shake
+            showQuickMoodDialog()
+        }
+        
+        // Step counter functionality removed
+    }
+    
+    private fun showQuickMoodDialog() {
+        val feelings = arrayOf("😢", "😐", "😊", "😡", "❤️")
+        val prefs = requireContext().getSharedPreferences(todoPrefs, Context.MODE_PRIVATE)
+        val json = prefs.getString("todo_data", null)
+
+        val type = object : com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken<MutableMap<String, DailyData>>() {}.type
+        var todoMap: MutableMap<String, DailyData> = if (!json.isNullOrEmpty()) {
+            gson.fromJson(json, type)
+        } else mutableMapOf()
+
+        val dailyData = todoMap.getOrPut(todayDate) { DailyData() }
+        val currentIndex = feelings.indexOf(dailyData.feeling)
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Quick Mood Update (Shake Detected!)")
+            .setSingleChoiceItems(feelings, currentIndex) { dialog, which ->
+                dailyData.feeling = feelings[which]
+                tvMood.text = dailyData.feeling
+                val editor = prefs.edit()
+                editor.putString("todo_data", gson.toJson(todoMap))
+                editor.apply()
+                Toast.makeText(requireContext(), "Mood updated!", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
     private fun openFragment(fragment: Fragment) {
         parentFragmentManager.commit {
             replace(R.id.frameLayout, fragment)
             addToBackStack(null)
         }
+    }
+    
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sensorManager?.unregisterListeners()
     }
 }

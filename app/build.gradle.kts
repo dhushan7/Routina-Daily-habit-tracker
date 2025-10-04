@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
 }
 
 android {
@@ -40,22 +41,19 @@ android {
 }
 
 dependencies {
-    // AndroidX & Core libraries
+    // Core AndroidX libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment.ktx)
-
-    // Firebase Crashlytics build tools are usually a Gradle plugin, not a runtime dependency.
-    // If you actually need the runtime SDK, use 'com.google.firebase:firebase-crashlytics-ktx'.
     implementation(libs.firebase.crashlytics.buildtools)
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 
-    // Testing
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Firebase Crashlytics runtime SDK
+//    implementation("com.google.firebase:firebase-crashlytics-ktx:18.5.2")
 
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
@@ -63,11 +61,15 @@ dependencies {
     // MaterialCalendarView
     implementation("com.applandeo:material-calendar-view:1.9.2")
 
-    // MPAndroidChart — pick ONE of the two options below:
+    // MPAndroidChart for mood trend visualization
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    // (A) Using your version catalog (make sure libs.versions.toml defines it correctly)
-    implementation(libs.mpandroidchart)
+    // Widget support (Glance)
+    implementation("androidx.glance:glance-appwidget:1.0.0")
+    implementation("androidx.glance:glance-material3:1.0.0")
 
-    // (B) Or direct dependency (works without catalog, since we added JitPack in settings.gradle.kts)
-    // implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    // Sensor and step counter (core-ktx already included)
+    // implementation("androidx.core:core-ktx:1.12.0") <- redundant, already included above
+
+
 }

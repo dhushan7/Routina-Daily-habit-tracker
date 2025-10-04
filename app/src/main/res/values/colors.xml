@@ -10,6 +10,8 @@
     <color name="blue">#62FBFF</color>
     <color name="coral">#EDBD7A</color>
     <color name="indigo">#C478FA</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="orange">#FF9800</color>
 
 <!--    image color #0F3760(Navy) refreshing with structure and #FE8A5C(Coral) active -->
 </resources>

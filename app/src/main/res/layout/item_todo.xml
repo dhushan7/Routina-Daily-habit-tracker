@@ -3,52 +3,105 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/todo_card"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
+    android:orientation="vertical"
     android:padding="12dp"
     android:layout_marginHorizontal="8dp"
     android:layout_marginBottom="8dp">
 
-    <!-- Task name -->
-    <TextView
-        android:id="@+id/tvTask"
-        android:layout_width="0dp"
+    <!-- Top row: Task name and status -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Sample Task"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:ellipsize="end"
-        android:singleLine="true" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
 
-    <!-- Task status -->
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
+        <!-- Task name -->
+        <TextView
+            android:id="@+id/tvTask"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sample Task"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:ellipsize="end"
+            android:singleLine="true" />
+
+        <!-- Task status -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:padding="6dp"
+            android:background="@drawable/status_background"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Edit icon (only visible today) -->
+        <ImageView
+            android:id="@+id/btnEdit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="Edit"
+            android:visibility="gone"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Delete icon (only visible today) -->
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:contentDescription="Delete"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Bottom row: Category, Priority, Time -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pending"
-        android:textSize="14sp"
-        android:textColor="@color/teal"
-        android:padding="6dp"
-        android:background="@drawable/status_background"
-        android:layout_marginEnd="8dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <!-- Edit icon (only visible today) -->
-    <ImageView
-        android:id="@+id/btnEdit"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@android:drawable/ic_menu_edit"
-        android:contentDescription="Edit"
-        android:visibility="gone"
-        android:layout_marginEnd="8dp" />
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Health"
+            android:textSize="12sp"
+            android:textColor="@color/teal"
+            android:background="@drawable/category_background"
+            android:padding="4dp"
+            android:gravity="center" />
 
-    <!-- Delete icon (only visible today) -->
-    <ImageView
-        android:id="@+id/btnDelete"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@android:drawable/ic_menu_delete"
-        android:contentDescription="Delete"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/tvPriority"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Medium"
+            android:textSize="12sp"
+            android:textColor="@color/orange"
+            android:background="@drawable/priority_background"
+            android:padding="4dp"
+            android:gravity="center"
+            android:layout_marginHorizontal="4dp" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="9:00 AM"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:gravity="center" />
+    </LinearLayout>
+
 </LinearLayout>
