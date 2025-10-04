@@ -94,7 +94,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/hydrationCardContainer"
@@ -112,6 +113,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:layout_marginLeft="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView8"
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,12 +123,12 @@
                     android:id="@+id/imageView8"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginEnd="80dp"
+                    android:layout_marginEnd="72dp"
                     android:src="@drawable/water"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.489" />
+                    app:layout_constraintVertical_bias="0.486" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -161,7 +163,7 @@
                     android:id="@+id/imageView9"
                     android:layout_width="48dp"
                     android:layout_height="47dp"
-                    android:layout_marginEnd="80dp"
+                    android:layout_marginEnd="72dp"
                     android:src="@drawable/cal1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -200,12 +202,12 @@
                     android:id="@+id/imageView10"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_marginEnd="80dp"
+                    android:layout_marginEnd="72dp"
                     android:src="@drawable/todo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.493" />
+                    app:layout_constraintVertical_bias="0.567" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

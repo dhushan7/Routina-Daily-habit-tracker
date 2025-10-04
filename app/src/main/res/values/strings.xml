@@ -12,4 +12,5 @@
     <string name="get_started">Get Started</string>
     <string name="set_calorie_limit"><u>Set Calorie Limit</u></string>
     <string name="set_hydration_limit"><u>Set Hydration Limit</u></string>
+    <string name="Register" />
 </resources>
