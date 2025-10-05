@@ -87,7 +87,7 @@ class MoodTrendFragment : Fragment() {
         val entries = mutableListOf<Entry>()
         val calendar = Calendar.getInstance()
         
-        // Get mood data for the last 7 days
+        // last 7 days data
         for (i in 6 downTo 0) {
             calendar.add(Calendar.DAY_OF_YEAR, if (i == 6) -6 else 1)
             val date = dateFormat.format(calendar.time)
@@ -96,14 +96,14 @@ class MoodTrendFragment : Fragment() {
         }
 
         val dataSet = LineDataSet(entries, "Mood Trend")
-        dataSet.color = Color.parseColor("#FF6B6B")
-        dataSet.setCircleColor(Color.parseColor("#FF6B6B"))
+        dataSet.color = Color.parseColor("#4CAF50")         // green line
+        dataSet.setCircleColor(Color.parseColor("#4CAF50")) // green circles
         dataSet.lineWidth = 3f
         dataSet.circleRadius = 6f
         dataSet.setDrawCircleHole(false)
         dataSet.setDrawValues(false)
         dataSet.setDrawFilled(true)
-        dataSet.fillColor = Color.parseColor("#33FF6B6B")
+        dataSet.fillColor = Color.parseColor("#558BC34A")
 
         val lineData = LineData(dataSet)
         lineChart.data = lineData
@@ -119,7 +119,7 @@ class MoodTrendFragment : Fragment() {
         val type = object : TypeToken<MutableMap<String, DailyData>>() {}.type
         val todoMap: MutableMap<String, DailyData> = gson.fromJson(json, type)
         val dailyData = todoMap[date] ?: return 1
-        
+
         return when (dailyData.feeling) {
             "😢" -> 0
             "😐" -> 1

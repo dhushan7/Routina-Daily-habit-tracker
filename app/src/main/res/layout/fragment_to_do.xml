@@ -37,7 +37,7 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/container_todo"
+            android:background="@drawable/bg_card_todo"
             android:padding="12dp">
 
             <!-- Date -->
