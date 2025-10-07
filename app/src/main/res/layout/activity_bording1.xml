@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Every day is a fresh start to get better."
+        android:text="@string/every_day_is_a_fresh_start_to_get_better"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"

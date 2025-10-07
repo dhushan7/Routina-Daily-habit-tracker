@@ -44,12 +44,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // find views
+        // text views
         tvGreeting = view.findViewById(R.id.hmtext1)
         tvMood = view.findViewById(R.id.hmfeel)
         tvHydration = view.findViewById(R.id.hmHydration)
         tvCalories = view.findViewById(R.id.hmCal)
 
+        //containers
         containerMood = view.findViewById(R.id.moodCardContainer)
         containerHydration = view.findViewById(R.id.hydrationCardContainer)
         containerCalories = view.findViewById(R.id.calorieCardContainer)
@@ -70,7 +71,7 @@ class HomeFragment : Fragment() {
         // Initialize sensor manager
         initializeSensorManager()
         
-        // tap listeners
+        // container listeners
         containerMood.setOnClickListener { showMoodDialog() }
         containerHydration.setOnClickListener { openFragment(HealthFragment()) }
         containerCalories.setOnClickListener { openFragment(HealthFragment()) }
@@ -78,6 +79,7 @@ class HomeFragment : Fragment() {
         containerMoodTrend.setOnClickListener { openFragment(MoodTrendFragment()) }
     }
 
+    //cal and hydration fetch and load
     private fun loadHealthData() {
         val prefs = requireContext().getSharedPreferences(healthPrefs, Context.MODE_PRIVATE)
         val hydrationAdded = prefs.getInt("hydration_added", 0)
@@ -101,7 +103,7 @@ class HomeFragment : Fragment() {
             tvMood.text = "😐"
         }
     }
-
+    //mood update popup box
     private fun showMoodDialog() {
         val feelings = arrayOf("😢", "😐", "😊", "😡", "❤️")
         val prefs = requireContext().getSharedPreferences(todoPrefs, Context.MODE_PRIVATE)
@@ -129,6 +131,8 @@ class HomeFragment : Fragment() {
             .show()
     }
 
+
+    //detecting shake<-using sensors
     private fun initializeSensorManager() {
         sensorManager = SensorManager(requireContext())
         
@@ -136,8 +140,6 @@ class HomeFragment : Fragment() {
             // Quick mood update on shake
             showQuickMoodDialog()
         }
-        
-        // Step counter functionality removed
     }
     
     private fun showQuickMoodDialog() {

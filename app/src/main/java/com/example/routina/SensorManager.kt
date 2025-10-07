@@ -87,7 +87,7 @@ class SensorManager(private val context: Context) : SensorEventListener {
     }
     
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Handle accuracy changes if needed
+
     }
     
     fun getCurrentStepCount(): Int = stepCount

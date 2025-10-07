@@ -22,19 +22,19 @@ class HomePage : AppCompatActivity() {
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Apply system insets
+        //system insets
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Load HomeFragment by default
+        //Load HomeFragment by default
         if (savedInstanceState == null) {
             replaceFragment(HomeFragment())
         }
 
-        // Setup bottom navigation
+        //Setup bottom navigation
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navHome -> {
@@ -57,16 +57,16 @@ class HomePage : AppCompatActivity() {
             }
         }
 
-        // Handle back press only for HomeFragment
+        //Handle back press -> HomeFragment
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val currentFragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
 
                 // If currently showing HomeFragment -> exit app
                 if (currentFragment is HomeFragment) {
-                    finishAffinity() // closes the app completely
+                    finishAffinity() //closes the app completely
                 } else {
-                    // otherwise, let the system handle the default back behavior
+                    //otherwise, let the system handle the default back behavior
                     isEnabled = false
                     onBackPressedDispatcher.onBackPressed()
                 }

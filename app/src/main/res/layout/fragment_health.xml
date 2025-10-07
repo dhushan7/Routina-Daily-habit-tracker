@@ -16,7 +16,7 @@
         android:gravity="center"
         android:spacing="16dp">
 
-        <!-- 💧 Hydration Card -->
+        <!-- Hydration Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 🔥 Calories Card -->
+        <!-- Calories Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

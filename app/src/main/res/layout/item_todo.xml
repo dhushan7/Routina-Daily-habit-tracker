@@ -8,7 +8,6 @@
     android:layout_marginHorizontal="8dp"
     android:layout_marginBottom="8dp">
 
-    <!-- Top row: Task name and status -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +40,7 @@
             android:background="@drawable/status_background"
             android:layout_marginEnd="8dp" />
 
-        <!-- Edit icon (only visible today) -->
+        <!-- Edit (only today) -->
         <ImageView
             android:id="@+id/btnEdit"
             android:layout_width="24dp"
@@ -51,7 +50,7 @@
             android:visibility="gone"
             android:layout_marginEnd="8dp" />
 
-        <!-- Delete icon (only visible today) -->
+        <!-- Delete (only today) -->
         <ImageView
             android:id="@+id/btnDelete"
             android:layout_width="24dp"
@@ -61,7 +60,6 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <!-- Bottom row: Category, Priority, Time -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

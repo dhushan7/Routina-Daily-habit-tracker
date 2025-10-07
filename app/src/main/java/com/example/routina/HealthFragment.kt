@@ -47,12 +47,12 @@ class HealthFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_health, container, false)
 
-        // Hydration
+        //Hydration
         tvHydration = view.findViewById(R.id.tvHydration)
         btnAddWater = view.findViewById(R.id.btnAddWater)
         btnSetHydrationLimit = view.findViewById(R.id.btnSetHydrationLimit)
 
-        // Calories
+        //Calories
         tvCalories = view.findViewById(R.id.tvCalories)
         btnAddCalories = view.findViewById(R.id.btnAddCalories)
         btnSetCalorieLimit = view.findViewById(R.id.btnSetCalorieLimit)
@@ -60,14 +60,14 @@ class HealthFragment : Fragment() {
         loadData()
         updateUI()
 
-        // Add 250ml water
+        //Add 250ml water
         btnAddWater.setOnClickListener {
             hydrationAdded += 250
             saveData()
             updateUI()
         }
 
-        // Set hydration limit
+        //Set hydration limit
         btnSetHydrationLimit.setOnClickListener {
             showInputDialog("Set Hydration Limit (ml)") { input ->
                 val newLimit = input.toIntOrNull()
@@ -80,14 +80,14 @@ class HealthFragment : Fragment() {
             }
         }
 
-        // Add 100 kcal
+        //Add 100 kcal
         btnAddCalories.setOnClickListener {
             caloriesAdded += 100
             saveData()
             updateUI()
         }
 
-        // Set calorie limit
+        //Set calorie limit
         btnSetCalorieLimit.setOnClickListener {
             showInputDialog("Set Calorie Limit (kcal)") { input ->
                 val newLimit = input.toIntOrNull()
@@ -100,17 +100,19 @@ class HealthFragment : Fragment() {
             }
         }
 
-        // Schedule daily reset & reminder
+        //Schedule daily reset & reminder
         scheduleAlarms()
 
         return view
     }
-
+    //update water cals
     private fun updateUI() {
         tvHydration.text = "Water: $hydrationAdded / $hydrationLimit ml"
         tvCalories.text = "Calories: $caloriesAdded / $caloriesLimit kcal"
     }
 
+
+    //Input dialog
     private fun showInputDialog(title: String, onResult: (String) -> Unit) {
         val input = android.widget.EditText(requireContext())
         AlertDialog.Builder(requireContext())
@@ -141,7 +143,7 @@ class HealthFragment : Fragment() {
         caloriesAdded = prefs.getInt(CALORIES_ADDED, 0)
         caloriesLimit = prefs.getInt(CALORIES_LIMIT, 2500)
 
-        // Reset daily data if app opened on new day
+        //Reset daily data if app opened on new day
         val lastDate = prefs.getString(LAST_DATE, "")
         val today = dateFormat.format(Date())
         if (lastDate != today) {
@@ -151,16 +153,17 @@ class HealthFragment : Fragment() {
         }
     }
 
+
     private fun scheduleAlarms() {
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        //  Reset Alarm at 11:59 PM
+        //Reset Alarm at 11:59 PM
         val resetIntent = Intent(requireContext(), ResetReceiver::class.java)
         val resetPendingIntent = PendingIntent.getBroadcast(
             requireContext(), 1, resetIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-
+        //Reset values 11.59 pm
         val resetTime = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 23)
@@ -176,7 +179,7 @@ class HealthFragment : Fragment() {
             resetPendingIntent
         )
 
-        // Reminder Alarm at 4:00 PM
+        //Reminder Alarm at 4:00 PM
         val reminderIntent = Intent(requireContext(), ReminderReceiver::class.java)
         val reminderPendingIntent = PendingIntent.getBroadcast(
             requireContext(), 2, reminderIntent,

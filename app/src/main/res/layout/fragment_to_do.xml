@@ -16,10 +16,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Task Tracker"
+            android:text="@string/what_s_need_to_do_today"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/navy"
             android:gravity="center"
             android:layout_marginBottom="16dp" />
 
@@ -29,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- New container for date + emoji + completion -->
         <LinearLayout
             android:id="@+id/dateFeelingContainer"
             android:layout_width="match_parent"
@@ -64,9 +63,6 @@
                 android:padding="8dp"/>
         </LinearLayout>
 
-        <!-- Completion Percentage -->
-
-        <!-- Rectangle container for tasks -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,7 +99,7 @@
             android:padding="16dp" />
 
 
-        <!-- Add Task Button -->
+        <!-- Add Task -->
         <Button
             android:id="@+id/btnAddTask"
             android:layout_width="wrap_content"

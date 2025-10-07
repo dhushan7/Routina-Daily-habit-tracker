@@ -23,7 +23,7 @@ data class Task(
 
 data class DailyData(
     var tasks: MutableList<Task> = mutableListOf(),
-    var feeling: String = "😐" // default neutral
+    var feeling: String = "😐" //default neutral
 )
 
 class ToDoFragment : Fragment() {
@@ -60,10 +60,10 @@ class ToDoFragment : Fragment() {
         calendarView.maxDate = System.currentTimeMillis()
         loadTasks()
 
-        // Load today’s tasks by default
+        //Load today’s tasks by default
         loadTasksForDate(todayDate)
 
-        // Handle date selection
+        //Handle date selection
         calendarView.setOnDateChangeListener { _, year, month, day ->
             val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, day)
             loadTasksForDate(selectedDate)
@@ -75,7 +75,7 @@ class ToDoFragment : Fragment() {
     }
 
     private fun loadTasksForDate(date: String) {
-        // Clear task container
+        //Clear task container
         todoContainer.removeAllViews()
 
         val isToday = date == todayDate
@@ -83,11 +83,11 @@ class ToDoFragment : Fragment() {
 
         val dailyData = todoMap.getOrPut(date) { DailyData() }
 
-        // update date + emoji + completion percentage
+        //update date , emoji , completion percentage
         tvSelectedDate.text = date
         tvDayFeeling.text = dailyData.feeling
         
-        // Calculate and display completion percentage
+        //Completion percentage
         val completionPercentage = if (dailyData.tasks.isEmpty()) {
             0
         } else {
@@ -102,7 +102,7 @@ class ToDoFragment : Fragment() {
             tvDayFeeling.setOnClickListener(null) // read-only
         }
 
-        // Load all tasks for this day
+        //Load all tasks for this day
         for (task in dailyData.tasks) {
             val taskView = layoutInflater.inflate(R.layout.item_todo, todoContainer, false)
             val tvTask = taskView.findViewById<TextView>(R.id.tvTask)
@@ -119,13 +119,13 @@ class ToDoFragment : Fragment() {
             tvPriority.text = task.priority
             tvTime.text = if (task.time.isNotEmpty()) task.time else "No time set"
 
-            // Set status color based on status
+            //Set status colors on status
             when (task.status) {
                 "Completed" -> tvStatus.setBackgroundColor(android.graphics.Color.parseColor("#4CAF50"))
                 "In-Progress" -> tvStatus.setBackgroundColor(android.graphics.Color.parseColor("#FF9800"))
                 else -> tvStatus.setBackgroundColor(android.graphics.Color.parseColor("#9E9E9E"))
             }
-
+            //is today, user can edit data
             if (isToday) {
                 btnEdit.visibility = View.VISIBLE
                 btnDelete.visibility = View.VISIBLE
@@ -154,18 +154,20 @@ class ToDoFragment : Fragment() {
         val spinnerPriority = dialogView.findViewById<Spinner>(R.id.spinnerPriority)
         val inputTime = dialogView.findViewById<EditText>(R.id.etHabitTime)
         
-        // Setup category spinner
-        val categories = arrayOf("Health", "Work", "Personal", "Learning", "Exercise", "General")
+        //Setup category
+        val categories = arrayOf("Health", "Work", "Personal", "Learning", "General")
         val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCategory.adapter = categoryAdapter
         
-        // Setup priority spinner
+        //Setup priority
         val priorities = arrayOf("Low", "Medium", "High")
         val priorityAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorities)
         priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerPriority.adapter = priorityAdapter
-        
+
+
+        //add new task
         AlertDialog.Builder(requireContext())
             .setTitle("Add New Task")
             .setView(dialogView)
@@ -188,6 +190,7 @@ class ToDoFragment : Fragment() {
             .show()
     }
 
+    //edit the task
     private fun showEditTaskDialog(date: String, task: Task) {
         val input = EditText(requireContext())
         input.setText(task.name)
@@ -205,7 +208,7 @@ class ToDoFragment : Fragment() {
             .setNegativeButton("Cancel", null)
             .show()
     }
-
+    //status
     private fun showStatusDialog(date: String, task: Task) {
         val statuses = arrayOf("Pending", "In-Progress", "Completed")
         val currentIndex = statuses.indexOf(task.status)
@@ -221,6 +224,7 @@ class ToDoFragment : Fragment() {
             .show()
     }
 
+    //add/edit mood
     private fun showFeelingDialog(date: String) {
         val feelings = arrayOf("😢", "😐", "😊", "😡", "❤️")
         val dailyData = todoMap[date]!!
@@ -238,13 +242,15 @@ class ToDoFragment : Fragment() {
             .show()
     }
 
-    // ---------- SharedPreferences ----------
+    //Saved in SharedPreferences
     private fun saveTasks() {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val json = gson.toJson(todoMap)
         prefs.edit().putString(DATA_KEY, json).apply()
     }
 
+
+    //load from the local storage
     private fun loadTasks() {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val json = prefs.getString(DATA_KEY, null)
