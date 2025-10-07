@@ -24,11 +24,9 @@ class ToDoWidgetProvider : AppWidgetProvider() {
     }
 
     override fun onEnabled(context: Context) {
-        // Enter relevant functionality for when the first widget is created
     }
 
     override fun onDisabled(context: Context) {
-        // Enter relevant functionality for when the last widget is disabled
     }
 
     companion object {
@@ -39,17 +37,17 @@ class ToDoWidgetProvider : AppWidgetProvider() {
         ) {
             val views = RemoteViews(context.packageName, R.layout.todo_widget)
             
-            // Calculate task completion percentage
+            //Completion percentage
             val completionPercentage = calculateTaskCompletion(context)
             val completedTasks = getCompletedTasksCount(context)
             val totalTasks = getTotalTasksCount(context)
             
-            // Update widget views
+            //Update widget views
             views.setTextViewText(R.id.widget_percentage, "${completionPercentage.toInt()}%")
             views.setTextViewText(R.id.widget_habits_text, "$completedTasks/$totalTasks tasks")
             views.setProgressBar(R.id.widget_progress, 100, completionPercentage.toInt(), false)
             
-            // Set click intent to open app
+            //Set click intent to open app
             val intent = Intent(context, HomePage::class.java)
             val pendingIntent = PendingIntent.getActivity(
                 context, 0, intent,

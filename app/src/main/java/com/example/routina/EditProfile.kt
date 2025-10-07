@@ -16,7 +16,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("UserData", MODE_PRIVATE)
 
-        // Views
+        //Views
         val editNickname: EditText = findViewById(R.id.editNickname)
         val editBio: EditText = findViewById(R.id.editBio)
         val editAge: EditText = findViewById(R.id.editAge)
@@ -26,14 +26,14 @@ class EditProfileActivity : AppCompatActivity() {
         val btnCancel: Button = findViewById(R.id.btnCancel)
 
 
-        // Load saved values
+        //Load saved data
         editNickname.setText(sharedPref.getString("nickname", ""))
         editBio.setText(sharedPref.getString("bio", ""))
         editAge.setText(sharedPref.getString("age", ""))
         editPhone.setText(sharedPref.getString("phone", ""))
         bloodGrp.setText(sharedPref.getString("blood-grp",""))
 
-        // Save changes
+        //Save changes
         btnSave.setOnClickListener {
             val newNick = editNickname.text.toString()
             val newBio = editBio.text.toString()
@@ -51,11 +51,11 @@ class EditProfileActivity : AppCompatActivity() {
             }
 
             Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show()
-            finish() // go back to ProfileFragment
+            finish() //go back to ProfileFragment
         }
 
         btnCancel.setOnClickListener {
-            finish() // just close without saving
+            finish() //just close without saving
         }
     }
 }

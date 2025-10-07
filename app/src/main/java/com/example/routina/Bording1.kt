@@ -31,19 +31,19 @@ class Bording1 : AppCompatActivity() {
 
         // 🔍 Decision flow:
         when {
-            // ✅ Case 1: User is logged in → Go directly to HomePage
+            //if user is logged in -> Go directly to HomePage
             isLoggedIn -> {
                 startActivity(Intent(this, HomePage::class.java))
                 finish()
             }
 
-            // 🧾 Case 2: User has registered before but not logged in
+            //if user has registered before but not logged in -> login
             !isLoggedIn && email != null && password != null -> {
                 startActivity(Intent(this, Login::class.java))
                 finish()
             }
 
-            // 🆕 Case 3: New user → Stay on Bording1
+            //if new user -> Stay on Bording page
             else -> {
                 val launchingBtn1: Button = findViewById(R.id.launchingbtn1)
                 launchingBtn1.setOnClickListener {

@@ -19,7 +19,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // ✅ Setup ViewBinding FIRST
+        //Setup ViewBinding
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
             insets
         }
 
-        // ✅ Check if user is already logged in
+        //Check if user is already logged in -> HomePage
         val sharedPref = getSharedPreferences("UserData", Context.MODE_PRIVATE)
         if (sharedPref.getBoolean("isLoggedIn", false)) {
             startActivity(Intent(this, HomePage::class.java))
@@ -38,12 +38,12 @@ class Login : AppCompatActivity() {
             return
         }
 
-        // ✅ Register link navigation
+        //Register link navigation
         binding.RegLink.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
         }
 
-        // ✅ Login button listener
+        //Login button listener
         binding.btnLogin.setOnClickListener {
             val enteredEmail = binding.emailLogin.text.toString().trim()
             val enteredPass = binding.passLogin.text.toString().trim()
@@ -51,20 +51,20 @@ class Login : AppCompatActivity() {
             val savedEmail = sharedPref.getString("email", null)
             val savedPass = sharedPref.getString("password", null)
 
-            // Validation
+            //Validation for data fields
             if (enteredEmail.isEmpty() || enteredPass.isEmpty()) {
                 Toast.makeText(this, "Please enter email and password", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-            // Login success
+            //Login success
             if (enteredEmail == savedEmail && enteredPass == savedPass) {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
 
-                // Save login status
+                //Save login status
                 sharedPref.edit().putBoolean("isLoggedIn", true).apply()
 
-                // Redirect to HomePage
+                //Navigate to HomePage
                 startActivity(Intent(this, HomePage::class.java))
                 finish()
             } else {

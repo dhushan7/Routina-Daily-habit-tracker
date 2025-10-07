@@ -48,7 +48,7 @@ class MoodTrendFragment : Fragment() {
         lineChart.setPinchZoom(true)
         lineChart.setBackgroundColor(Color.WHITE)
 
-        // Configure X-axis
+        //Configure X-axis
         val xAxis = lineChart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.setDrawGridLines(false)
@@ -61,7 +61,7 @@ class MoodTrendFragment : Fragment() {
             }
         }
 
-        // Configure Y-axis
+        //Configure Y-axis
         val leftAxis = lineChart.axisLeft
         leftAxis.setDrawGridLines(true)
         leftAxis.axisMinimum = 0f
@@ -87,7 +87,7 @@ class MoodTrendFragment : Fragment() {
         val entries = mutableListOf<Entry>()
         val calendar = Calendar.getInstance()
         
-        // last 7 days data
+        //get last 7 days data
         for (i in 6 downTo 0) {
             calendar.add(Calendar.DAY_OF_YEAR, if (i == 6) -6 else 1)
             val date = dateFormat.format(calendar.time)
@@ -96,8 +96,8 @@ class MoodTrendFragment : Fragment() {
         }
 
         val dataSet = LineDataSet(entries, "Mood Trend")
-        dataSet.color = Color.parseColor("#4CAF50")         // green line
-        dataSet.setCircleColor(Color.parseColor("#4CAF50")) // green circles
+        dataSet.color = Color.parseColor("#4CAF50")         //line
+        dataSet.setCircleColor(Color.parseColor("#4CAF50")) //points
         dataSet.lineWidth = 3f
         dataSet.circleRadius = 6f
         dataSet.setDrawCircleHole(false)

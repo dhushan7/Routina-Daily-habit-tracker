@@ -23,7 +23,7 @@ class Register : AppCompatActivity() {
             insets
         }
 
-        // Buttons & Inputs
+        //Buttons & Inputs
         val btnRegister: Button = findViewById(R.id.buttonReg)
         val uName: EditText = findViewById(R.id.Name)
         val uAge: EditText = findViewById(R.id.Age)
@@ -50,28 +50,28 @@ class Register : AppCompatActivity() {
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    // Save details in SharedPreferences
+                    //Save details in SharedPreferences
                     val sharedPref = getSharedPreferences("UserData", MODE_PRIVATE)
                     with(sharedPref.edit()) {
                         putString("name", name)
                         putString("age", age)
                         putString("email", email)
                         putString("password", pass)
-                        putBoolean("isLoggedIn", false) // user must log in first
+                        putBoolean("isLoggedIn", false) //then user must login
                         apply()
                     }
 
                     Toast.makeText(this, "Registration successful! Please log in.", Toast.LENGTH_LONG).show()
 
-                    // Navigate to Login page
+                    //Navigate to Login page
                     val intent = Intent(this, Login::class.java)
                     startActivity(intent)
-                    finish() // Close Register activity so user can’t come back with back button
+                    finish() //Close Register activity so user can’t come back with back button
                 }
             }
         }
 
-        // Already have an account - go to login
+        //go to login
         loginLink.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)

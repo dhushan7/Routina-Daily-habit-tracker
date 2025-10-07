@@ -22,7 +22,7 @@ class ProfileFragment : Fragment() {
 
         val sharedPref = requireActivity().getSharedPreferences("UserData", AppCompatActivity.MODE_PRIVATE)
 
-        // Views
+        //Views
         val nameView: TextView = view.findViewById(R.id.viewName)
         val emailView: TextView = view.findViewById(R.id.viewEmail)
         val nicknameView: TextView = view.findViewById(R.id.viewNickname)
@@ -33,7 +33,7 @@ class ProfileFragment : Fragment() {
         val btnEdit: Button = view.findViewById(R.id.btnEditProfile)
         val btnLogout: Button = view.findViewById(R.id.btnLogout)
 
-        // Load saved values
+        //Load saved values
         val name = sharedPref.getString("name", "User")
         val email = sharedPref.getString("email", "N/A")
         val age = sharedPref.getString("age", "Not set")
@@ -42,7 +42,7 @@ class ProfileFragment : Fragment() {
         val phone = sharedPref.getString("phone", "Not set")
         val bloodGrp = sharedPref.getString("blood-grp", "Not set")
 
-        // Display values
+        //Display values
         nameView.text = name
         emailView.text = email
         ageView.text = age
@@ -51,13 +51,13 @@ class ProfileFragment : Fragment() {
         phoneView.text = phone
         bloodGrpView.text = bloodGrp
 
-        // Navigate to Edit Profile
+        //Navigate to Edit Profile
         btnEdit.setOnClickListener {
             val intent = Intent(requireActivity(), EditProfileActivity::class.java)
             startActivity(intent)
         }
 
-        // Logout
+        //Logout
         btnLogout.setOnClickListener {
             sharedPref.edit().putBoolean("isLoggedIn", false).apply()
             val intent = Intent(requireActivity(), Login::class.java)
